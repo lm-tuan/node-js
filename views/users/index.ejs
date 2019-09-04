@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+    />
+  </head>
+  <body>
+    <% include ./../layouts/common %>
+    <div class="container">
+      <h1>This is User</h1>
+      <a href="user/create" style="margin-bottom: 10px;" type="button" class="btn btn-primary">New Item</a>
+      <form action="user/search" method="GET"> 
+         <div class="row">
+            <div class="col-xs-6 col-md-4">
+               <div class="input-group">
+               <input type="text" class="form-control" placeholder="Search" name="q"/>
+               <div class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">
+                     <span class="glyphicon glyphicon-search"></span>
+                  </button>
+               </div>
+               </div>
+            </div>
+         </div>
+         </form>
+      <h2></h2>
+      <div class="panel-group">
+        <div class="panel panel-primary">
+          <div class="panel-heading">List Users</div>
+          <div class="panel-body">
+            <table class="table table-bordered">
+              <thead>
+                <tr class="row">
+                  <th class="col-lg-1">ID</th>
+                  <th class="col-lg-3">Name</th>
+                  <th class="col-lg-4">Phone</th>
+                  <th class="col-lg-4">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% users.forEach(function(user,i) { %>
+                <tr class="row">
+                  <td><%= i + 1 %></td>
+                  <td><%= user.name %></td>
+                  <td><%= user.phone %></td>
+                  <td>
+                    <a href="/user/detail/<%= user._id %>" type="button" class="btn btn-default">
+                      Detail
+                    </a>
+                    <a href="/user/edit/<%= user._id %>" type="button" class="btn btn-warning">Edit</a>
+                    <a href="/user/delete/<%= user._id %>" onClick="return confirm('Do you want delete user ?')" type="button" class="btn btn-danger">Delete</a>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
